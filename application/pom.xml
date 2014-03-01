@@ -7,6 +7,8 @@
     <groupId>application</groupId>
     <artifactId>application</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>timemanager :: application</name>
+    <packaging>pom</packaging>
 
     <description>时间管理工具POM</description>
 
