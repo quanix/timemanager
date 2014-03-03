@@ -1,6 +1,9 @@
 import com.domac.app.jetty.JettyFactory;
 import org.eclipse.jetty.server.Server;
 
+import java.awt.*;
+import java.net.URI;
+
 /**
  * @author : lihaoquan
  *
@@ -25,8 +28,13 @@ public class JettyRunner {
             //当控制台中输入回车的时候,应用重启
 
             server.start();
-            System.out.println("application start success!url: http://localhost:" + PORT + CONTEXT+"/restartWeblogic.jsp");
-            System.out.println("press enter will restart this application!");
+            System.out.println("====application start success!url: http://localhost:" + PORT + CONTEXT);
+            System.out.println("====press enter will restart this application!");
+
+            /**
+             * Linux 或 Unix 下打开操作系统设置的默认浏览器(建议使用Chrome或Firefox,Safari等)
+             */
+            Desktop.getDesktop().browse(new URI("http://localhost:" + PORT + CONTEXT));
 
             while(true) {
                 char c = (char) System.in.read();
