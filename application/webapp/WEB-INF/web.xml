@@ -6,7 +6,7 @@
         version="3.0"
         metadata-complete="false">
 
-    <display-name>timemanager</display-name>
+    <display-name>tm</display-name>
 
     <!-- 定义Spring的配置文件 -->
     <context-param>
