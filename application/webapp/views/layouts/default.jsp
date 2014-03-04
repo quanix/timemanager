@@ -8,7 +8,7 @@
     <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/static/fullcalendar/fullcalendar.css' />
     <script type='text/javascript' src='<%=request.getContextPath() %>/static/jquery/jquery.min.js'></script>
     <script type='text/javascript' src='<%=request.getContextPath() %>/static/fullcalendar/fullcalendar.js'></script>
-    <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/application.js "></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/application.js"></script>
     <style>
         legend {
             cursor: pointer;

@@ -22,6 +22,7 @@ $.app = {
             selectable: true,
             selectHelper: true,
             select: function(start, end, allDay) {
+                openNewCalendarForm(start,end);
                 calendar.fullCalendar('unselect');
             }
         });
@@ -31,8 +32,13 @@ $.app = {
                 '新增</span>');
 
         $(".fc-button-add").click(function() {
-            alert('创建测试');
+            openNewCalendarForm();
         });
+
+
+        function openNewCalendarForm(start, end) {
+             alert('start:'+start+",end:"+end);
+        }
 
     }
 }
