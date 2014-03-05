@@ -34,8 +34,7 @@ public class CalendarController {
      */
     @RequestMapping("/index")
     public String homepage() {
-        //testCal();
-        //logger.info("登陆日历管理首页");
+        logger.info("登陆日历管理首页");
         return "/views/layouts/default.jsp";
     }
 
@@ -47,8 +46,12 @@ public class CalendarController {
     @RequestMapping("/load")
     @ResponseBody
     public List<Calendar> ajaxLoad() {
-        logger.info("异步载入日历数据");
         List<Calendar> calendars = Lists.newArrayList();
+        try {
+            calendars = calendarService.getAll();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         return calendars;
     }
 
@@ -71,19 +74,4 @@ public class CalendarController {
         return null;
     }
 
-
-    /**
-     * .测试日历CRUD
-     */
-    public void testCal() {
-
-        Calendar calendar = new Calendar();
-        calendar.setUserid("admin");
-        calendar.setTitle(UUID.randomUUID().toString()+"_xxxxxxx");
-
-        calendarService.update(calendar);
-
-        List<Calendar> calendarList = calendarService.findByUserid("admin");
-        System.out.println("----- calendar table size :"+calendarList.size());
-    }
 }

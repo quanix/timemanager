@@ -20,7 +20,7 @@ public class CalendarService {
     @Autowired
     private CalendarDao calendarDao;
 
-    public List<Calendar> findByUserid(String userid) {
+    public List<Calendar> findByUserid(String userid) throws Exception {
         return calendarDao.findByUserid(userid);
     }
 
@@ -28,7 +28,16 @@ public class CalendarService {
      * .保存与更新
      * @param calendar
      */
-    public void update(Calendar calendar) {
+    public void update(Calendar calendar) throws Exception {
         calendarDao.save(calendar);
+    }
+
+
+    /**
+     * .获取所有对象
+     * @return
+     */
+    public List<Calendar> getAll() throws Exception {
+        return (List<Calendar>)calendarDao.findAll();
     }
 }
