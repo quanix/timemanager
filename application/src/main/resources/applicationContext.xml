@@ -60,8 +60,6 @@
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
-
-
     <!-- 开发环境 PROFILE -->
     <beans profile="development">
         <context:property-placeholder ignore-resource-not-found="true"
@@ -79,6 +77,15 @@
             <jdbc:script location="classpath:sql/h2/schema.sql" />
             <jdbc:script location="classpath:sql/h2/import-data.sql" encoding="UTF-8"/>
         </jdbc:initialize-database>
+    </beans>
+
+    <beans profile="production">
+        <context:property-placeholder ignore-resource-not-found="true"
+                                      location="classpath*:/config/application.properties" />
+        <bean id="dataSource"
+              class="org.springframework.jndi.JndiObjectFactoryBean">
+            <property name="jndiName" value="${app.jndi}"></property>
+        </bean>
     </beans>
 
 </beans>
