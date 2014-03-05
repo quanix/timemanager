@@ -1,5 +1,9 @@
 package com.domac.app.calendar.entity;
 
+import com.domac.app.common.entity.AbstractEntity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -7,12 +11,14 @@ import java.util.Date;
  *
  * 日历对象
  */
-public class Calendar {
+@Entity
+@Table(name = "t_app_calendar")
+public class Calendar extends AbstractEntity {
 
     /**
      * 所有人
      */
-    private String userId;
+    private String userid;
 
     /**
      * 标题
@@ -27,7 +33,7 @@ public class Calendar {
     /**
      * 开始日期
      */
-    private Date startDate;
+    private Date startdate;
 
     /**
      * 持续时候
@@ -37,30 +43,30 @@ public class Calendar {
     /**
      * 开始时间
      */
-    private Date startTime;
+    private Date starttime;
 
     /**
      * 结束时间
      */
-    private Date endTime;
+    private Date endtime;
 
     /**
      * 背景颜色
      */
-    private String backgroundColor;
+    private String backgroundcolor;
 
     /**
      * 字体颜色
      */
-    private String textColor;
+    private String textcolor;
 
 
-    public String getUserId() {
-        return userId;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getTitle() {
@@ -79,12 +85,12 @@ public class Calendar {
         this.details = details;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
     }
 
     public Integer getLength() {
@@ -95,35 +101,35 @@ public class Calendar {
         this.length = length;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getStarttime() {
+        return starttime;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setStarttime(Date starttime) {
+        this.starttime = starttime;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public Date getEndtime() {
+        return endtime;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setEndtime(Date endtime) {
+        this.endtime = endtime;
     }
 
-    public String getBackgroundColor() {
-        return backgroundColor;
+    public String getBackgroundcolor() {
+        return backgroundcolor;
     }
 
-    public void setBackgroundColor(String backgroundColor) {
-        this.backgroundColor = backgroundColor;
+    public void setBackgroundcolor(String backgroundcolor) {
+        this.backgroundcolor = backgroundcolor;
     }
 
-    public String getTextColor() {
-        return textColor;
+    public String getTextcolor() {
+        return textcolor;
     }
 
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
+    public void setTextcolor(String textcolor) {
+        this.textcolor = textcolor;
     }
 }

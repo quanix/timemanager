@@ -31,11 +31,16 @@
         }
 
         #calendar {
-            width: 1000px;
+            width: 800px;
             margin: 0 auto;
         }
     </style>
     <script>
+
+        function getCtx() {
+            return '<%=request.getContextPath() %>';
+        }
+
         $(document).ready(function() {
             $.app.initCalendar();//初始化日历
         });

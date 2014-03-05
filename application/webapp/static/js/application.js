@@ -1,5 +1,8 @@
 $.app = {
 
+    /**
+     * 初始化日历
+     */
     initCalendar : function() {
 
         var calendar = $('#calendar').fullCalendar({
@@ -9,6 +12,8 @@ $.app = {
                 center: 'title',
                 right: 'agendaDay,agendaWeek,month'
             },
+
+            events : getCtx()+'/web/cal/load',
 
             eventDrop: function(event, delta) {
                 alert("drop");

@@ -1,3 +1,4 @@
+import com.domac.app.common.service.Profiles;
 import com.domac.app.jetty.JettyFactory;
 import org.eclipse.jetty.server.Server;
 
@@ -20,6 +21,8 @@ public class JettyRunner {
     private static final String CONTEXT = "/tm";//上下文名称
 
     public static void main(String[] args) throws Exception {
+
+        Profiles.setProfileAsSystemProperty(Profiles.DEVELOPMENT);
 
         Server server = JettyFactory.createServer(PORT, CONTEXT);//创建服务
         JettyFactory.setTldNames(server, new String[] {"spring-webmvc"});//设置JARS...
