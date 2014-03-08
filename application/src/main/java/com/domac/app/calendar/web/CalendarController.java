@@ -29,7 +29,7 @@ public class CalendarController {
      * 登陆日历管理首页
      * @return
      */
-    @RequestMapping("/index")
+    @RequestMapping(value = {"/{index:index;?.*}"})
     public String homepage() {
         logger.info("登陆日历管理首页");
         return "/views/layouts/default.jsp";

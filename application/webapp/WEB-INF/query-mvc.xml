@@ -26,6 +26,11 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <mvc:view-controller path="/" view-name="redirect:/cal/index.action"/>
+    <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <mvc:default-servlet-handler/>
+
+
     <!-- 定义JSP文件的位置 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value=""/>
