@@ -26,7 +26,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <mvc:view-controller path="/" view-name="redirect:/cal/index.action"/>
+    <mvc:view-controller path="/" view-name="redirect:/cal/index"/>
     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
     <mvc:default-servlet-handler/>
 
