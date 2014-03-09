@@ -2,9 +2,12 @@ package com.domac.app.calendar.web;
 
 import com.domac.app.calendar.entity.Calendar;
 import com.domac.app.calendar.service.CalendarService;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,25 +49,43 @@ public class CalendarController {
      */
     @RequestMapping("/load")
     @ResponseBody
-    public List<Map> ajaxLoad() {
+    public List<Map> ajaxLoad() throws Exception{
+        /**
+         * 把日历列表转换为适当的对象列表
+         */
+        List<Calendar> calendarLists = calendarService.getAll();
+        return Lists.<Calendar,Map>transform(calendarLists,new Function<Calendar, Map>() {
+            @Override
+            public Map apply(Calendar calendar) {
+                Map resultMap = Maps.newHashMap();
 
-        System.out.println("zsdsdhsajdjasdjhasjdhj");
-
-        List<Map> calendars = Lists.newArrayList();
-        try {
-            Map<String,Object> map = Maps.newHashMap();
-
-            map.put("id", "1234234234");
-            map.put("start", "2014-03-06 20:00:00");
-            map.put("end", "2014-03-06 23:30:00");
-            map.put("title", "TYYSDS");
-            map.put("allDay", false);
-
-            calendars.add(map);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return calendars;
+                Date startDate = new Date(calendar.getStartdate().getTime());
+                Date endDate = DateUtils.addDays(startDate, calendar.getLength() - 1);
+                boolean allDays = calendar.getStarttime() == null && calendar.getEndtime() == null;
+                if(!allDays) {
+                    startDate.setHours(calendar.getStarttime().getHours());
+                    startDate.setMinutes(calendar.getStarttime().getMinutes());
+                    startDate.setSeconds(calendar.getStarttime().getSeconds());
+                    endDate.setHours(calendar.getEndtime().getHours());
+                    endDate.setMinutes(calendar.getEndtime().getMinutes());
+                    endDate.setSeconds(calendar.getEndtime().getSeconds());
+                }
+                resultMap.put("id", calendar.getId());
+                resultMap.put("start", DateFormatUtils.format(startDate, "yyyy-MM-dd HH:mm:ss"));
+                resultMap.put("end", DateFormatUtils.format(endDate, "yyyy-MM-dd HH:mm:ss"));
+                resultMap.put("allDay", allDays);
+                resultMap.put("title", calendar.getTitle());
+                resultMap.put("details", calendar.getDetails());
+                if(StringUtils.isNotEmpty(calendar.getBackgroundcolor())) {
+                    resultMap.put("backgroundColor", calendar.getBackgroundcolor());
+                    resultMap.put("borderColor", calendar.getBackgroundcolor());
+                }
+                if(StringUtils.isNotEmpty(calendar.getTextcolor())) {
+                    resultMap.put("textColor", calendar.getTextcolor());
+                }
+                return resultMap;
+            }
+        });
     }
 
     /**
