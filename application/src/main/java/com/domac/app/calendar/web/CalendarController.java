@@ -46,6 +46,10 @@ public class CalendarController {
         List<Calendar> calendars = Lists.newArrayList();
         try {
             calendars = calendarService.getAll();
+            for(Calendar calendar : calendars) {
+
+                System.out.println("============>"+calendar.getTitle());
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }

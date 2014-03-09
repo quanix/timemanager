@@ -1,8 +1,7 @@
 $.app = {
 
-    /**
-     * 初始化日历
-     */
+    /** ======================= Full Calendar 定义 ========================== **/
+
     initCalendar : function() {
 
         var calendar = $('#calendar').fullCalendar({
@@ -13,7 +12,7 @@ $.app = {
                 right: 'agendaDay,agendaWeek,month'
             },
 
-            events : getCtx()+'/web/cal/load',
+            events : getCtx()+'/cal/load',
 
             eventDrop: function(event, delta) {
                 alert("drop");
@@ -23,6 +22,9 @@ $.app = {
                 alert("click");
             },
 
+            loading:function(bool) {
+
+            },
             editable: true,
             selectable: true,
             selectHelper: true,
@@ -41,9 +43,29 @@ $.app = {
         });
 
 
+        /**
+         * 弹出新建日历表单
+         * @param start
+         * @param end
+         */
         function openNewCalendarForm(start, end) {
-             alert('start:'+start+",end:"+end);
+            var url = getCtx()+ '/cal/new';
+            //构造传递的地址
+            if(start) {
+                start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
+                end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
+                url = url + "?start=" + start + "&end=" + end;
+            }
+            //构造模态窗口
+
         }
+
+    },
+
+
+    /** ============================ 模态窗口定义 ============================== **/
+
+    modalDialog:function (title,url,settings) {
 
     }
 }

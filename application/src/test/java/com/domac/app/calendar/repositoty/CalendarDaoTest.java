@@ -2,6 +2,7 @@ package com.domac.app.calendar.repositoty;
 
 import com.domac.app.calendar.entity.Calendar;
 import com.domac.app.testcase.TransactionalTestCase;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,13 @@ public class CalendarDaoTest extends TransactionalTestCase {
     @Autowired
     private CalendarDao calendarDao;
 
+    @Before
+    public void insert() {
+        System.out.println("--------------");
+
+    }
+
+
     @Test
     public void getCalsByUserIds() {
 
@@ -31,7 +39,7 @@ public class CalendarDaoTest extends TransactionalTestCase {
         }
     }
 
-    @Test
+    //@Test
     public void getAll() {
         List<Calendar> calendars = (List<Calendar>) calendarDao.findAll();
         System.out.println(calendars.size());
