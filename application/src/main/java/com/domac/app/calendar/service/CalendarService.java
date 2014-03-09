@@ -34,6 +34,15 @@ public class CalendarService {
 
 
     /**
+     * 删除日历
+     * @param id
+     */
+    public void delete(String id) {
+        calendarDao.delete(id);
+    }
+
+
+    /**
      * .获取所有对象
      * @return
      */

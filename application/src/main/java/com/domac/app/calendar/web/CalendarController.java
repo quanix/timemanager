@@ -2,6 +2,7 @@ package com.domac.app.calendar.web;
 
 import com.domac.app.calendar.entity.Calendar;
 import com.domac.app.calendar.service.CalendarService;
+import com.domac.app.common.util.QueryUtil;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,22 @@ public class CalendarController {
 
     @Autowired
     private CalendarService calendarService;
+
+    private static List<String> backgroundColorList = Lists.newArrayList();
+
+    static {
+
+        backgroundColorList.add("#3a87ad");
+        backgroundColorList.add("#0d7813");
+        backgroundColorList.add("#f2a640");
+        backgroundColorList.add("#b373b3");
+        backgroundColorList.add("#f2a640");
+        backgroundColorList.add("#668cb3");
+        backgroundColorList.add("#28754e");
+        backgroundColorList.add("#8c66d9");
+
+    }
+
 
     /**
      * 登陆日历管理首页
@@ -103,8 +121,29 @@ public class CalendarController {
      */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     @ResponseBody
-    public String updateCal() {
-        return null;
+    public String updateCal(@ModelAttribute("calendar") Calendar calendar) {
+        if(QueryUtil.isNotEmpty(calendar)) {
+            try {
+                calendarService.update(calendar);
+                return "1";
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "0";
+    }
+
+
+    /**
+     * 删除主键为{id}的日历
+     * @param id
+     * @return
+     */
+    @RequestMapping(value ="/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteCal(String id) {
+        calendarService.delete(id);
+        return "1";
     }
 
 }
