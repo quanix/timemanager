@@ -12,11 +12,10 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +33,8 @@ public class CalendarController {
     @Autowired
     private CalendarService calendarService;
 
+    private static final long oneDayMillis = 24L * 60 * 60 * 1000;
+    private static final String dataFormat = "yyyy-MM-dd HH:mm:ss";
     private static List<String> backgroundColorList = Lists.newArrayList();
 
     static {
@@ -111,7 +112,29 @@ public class CalendarController {
      * @return
      */
     @RequestMapping(value = "/new",method = RequestMethod.GET)
-    public String initNewCal() {
+    public String initNewCal(
+            @RequestParam(value = "start", required = false)
+            @DateTimeFormat(pattern = dataFormat) Date start,
+            @RequestParam(value = "end", required = false)
+            @DateTimeFormat(pattern = dataFormat) Date end,Model model) {
+
+        Calendar calendar = new Calendar();
+        calendar.setLength(1);
+        if(start != null) {
+            calendar.setStartdate(start);
+            calendar.setLength((int)Math.ceil(1.0 * (end.getTime() - start.getTime()) / oneDayMillis));
+            if(DateUtils.isSameDay(start, end)) {
+                calendar.setLength(1);
+            }
+            if(!"00:00:00".equals(DateFormatUtils.format(start, "HH:mm:ss"))) {
+                calendar.setStarttime(start);
+            }
+            if(!"00:00:00".equals(DateFormatUtils.format(end, "HH:mm:ss"))) {
+                calendar.setEndtime(end);
+            }
+        }
+        model.addAttribute("backgroundColorList", backgroundColorList);
+        model.addAttribute("model", calendar);
         return null;
     }
 
