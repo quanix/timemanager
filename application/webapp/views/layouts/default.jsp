@@ -6,7 +6,9 @@
     </title>
 
     <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/static/fullcalendar/fullcalendar.css' />
-    <script type='text/javascript' src='<%=request.getContextPath() %>/static/jquery/jquery.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/static/jquery-ui/css/custom-theme/jquery-ui-1.10.4.custom.css ' />
+    <script type='text/javascript' src='<%=request.getContextPath() %>/static/jquery/jquery-1.10.1.min.js'></script>
+    <script type='text/javascript' src='<%=request.getContextPath() %>/static/jquery-ui/js/jquery-ui-1.10.4.custom.min.js'></script>
     <script type='text/javascript' src='<%=request.getContextPath() %>/static/fullcalendar/fullcalendar.js'></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/static/js/application.js"></script>
     <style>

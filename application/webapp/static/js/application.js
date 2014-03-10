@@ -57,7 +57,7 @@ $.app = {
                 url = url + "?start=" + start + "&end=" + end;
             }
             //构造模态窗口
-
+            $.app.modalDialog("新增日历",url,"");
         }
 
     },
@@ -66,6 +66,6 @@ $.app = {
     /** ============================ 模态窗口定义 ============================== **/
 
     modalDialog:function (title,url,settings) {
-
+         alert('title = '+title+',url = '+url);
     }
 }
