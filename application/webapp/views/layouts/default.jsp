@@ -45,10 +45,36 @@
 
         $(document).ready(function() {
             $.app.initCalendar();//初始化日历
+
+            $( "#dialog" ).dialog({
+                autoOpen: false,
+                height: 200,
+                width: 450,
+                modal: true,
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $( "#create-user" ).button().click(function() {
+                $( "#dialog" ).dialog( "open" );
+            });
         });
     </script>
 </head>
 <body>
+
+<!-- 说明按钮 -->
+<button id="create-user">项目说明</button>
+
+<!-- 日历展示层 -->
 <div id='calendar'></div>
+
+<!-- 项目说明 -->
+<div id="dialog" title="项目地址">
+    <p>GitHub:</p>
+    https://github.com/quanet/timemanager
+</div>
 </body>
 </html>

@@ -118,6 +118,8 @@ public class CalendarController {
             @RequestParam(value = "end", required = false)
             @DateTimeFormat(pattern = dataFormat) Date end,Model model) {
 
+        logger.info("cal->new->get");
+
         Calendar calendar = new Calendar();
         calendar.setLength(1);
         if(start != null) {
@@ -145,6 +147,9 @@ public class CalendarController {
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     @ResponseBody
     public String updateCal(@ModelAttribute("calendar") Calendar calendar) {
+
+        logger.info("cal->new->post");
+
         if(QueryUtil.isNotEmpty(calendar)) {
             try {
                 calendarService.update(calendar);
@@ -153,7 +158,7 @@ public class CalendarController {
                 e.printStackTrace();
             }
         }
-        return "0";
+        return "hello calendar";
     }
 
 
