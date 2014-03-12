@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author : lihaoquan
@@ -148,21 +149,22 @@ public class CalendarController {
      */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     @ResponseBody
-    public String updateCal(@ModelAttribute("calendar") Calendar calendar) {
+    public String updateCal(@ModelAttribute("calendar") Calendar calendar) throws Exception {
 
         logger.info("cal->new->post");
+        String flag = "0";
         System.out.println(calendar.toString());
 
         if(QueryUtil.isNotEmpty(calendar)
                 && QueryUtil.isNotEmpty(calendar.getTitle())) {
             try {
-                //calendarService.update(calendar);
-                return "1";
+                calendarService.update(calendar);
+                flag = "1";
             }catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return "hello calendar";
+        return flag;
     }
 
 

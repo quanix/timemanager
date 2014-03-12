@@ -26,11 +26,12 @@ public class CalendarDaoTest extends TransactionalTestCase {
     @Before
     public void insert() {
         System.out.println("--------------");
+        //calendarDao.deleteAll();
 
     }
 
 
-    @Test
+    //@Test
     public void getCalsByUserIds() {
 
         List<Calendar> calendars = calendarDao.findByUserid("admin");
@@ -39,10 +40,12 @@ public class CalendarDaoTest extends TransactionalTestCase {
         }
     }
 
-    //@Test
+    @Test
     public void getAll() {
         List<Calendar> calendars = (List<Calendar>) calendarDao.findAll();
-        System.out.println(calendars.size());
+        for(Calendar calendar : calendars) {
+            logger.info(calendar.toString());
+        }
     }
 
 }

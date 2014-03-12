@@ -59,7 +59,7 @@ $.app = {
             //构造模态窗口
             $.app.modalDialog("新增日历",url,{
                 width:370,
-                height:430,
+                height:630,
                 ok : function(modal) {
 
                     var form = modal.find("#editForm");
@@ -101,7 +101,7 @@ $.app = {
             title : title,
             closeText : "关闭",
             closeOnEscape:false,
-            height:300,
+            height:400,
             width:600,
             modal:true,
             noTitle : false,
