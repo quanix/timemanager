@@ -132,4 +132,20 @@ public class Calendar extends AbstractEntity {
     public void setTextcolor(String textcolor) {
         this.textcolor = textcolor;
     }
+
+    @Override
+    public String toString() {
+        //return super.toString();
+        StringBuffer sb = new StringBuffer();
+        sb.append("----------------------\n");
+        sb.append("userid = "+userid+"\n");
+        sb.append("title = "+title+"\n");
+        sb.append("details = "+details+"\n");
+        sb.append("startdate = "+startdate+"\n");
+        sb.append("starttime = "+starttime+"\n");
+        sb.append("backgroundcolor = "+backgroundcolor+"\n");
+        sb.append("textcolor = "+textcolor+"\n");
+        sb.append("----------------------\n");
+        return sb.toString();
+    }
 }

@@ -62,6 +62,11 @@ $.app = {
                 height:430,
                 ok : function(modal) {
 
+                    var form = modal.find("#editForm");
+                    var url = getCtx() + "/cal/new";
+                    $.post(url, form.serialize(), function() {
+                        calendar.fullCalendar("refetchEvents");
+                    });
                     return true;
                 }
             });

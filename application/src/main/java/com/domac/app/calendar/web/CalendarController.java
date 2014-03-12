@@ -151,10 +151,12 @@ public class CalendarController {
     public String updateCal(@ModelAttribute("calendar") Calendar calendar) {
 
         logger.info("cal->new->post");
+        System.out.println(calendar.toString());
 
-        if(QueryUtil.isNotEmpty(calendar)) {
+        if(QueryUtil.isNotEmpty(calendar)
+                && QueryUtil.isNotEmpty(calendar.getTitle())) {
             try {
-                calendarService.update(calendar);
+                //calendarService.update(calendar);
                 return "1";
             }catch (Exception e) {
                 e.printStackTrace();
