@@ -52,6 +52,14 @@
 <script>
     $(function() {
 
+        var validationEngine = $("form").validationEngine({
+            promptPosition : "topRight",
+            autoPositionUpdate:true,
+            scroll:false
+        });
+
+        $.app.initDatetimePicker();
+
         $("#backgroundcolor").change(function() {
             $(this).attr("style", $(this).find("option:selected").attr("style"));
         })
@@ -59,6 +67,8 @@
         $(".all-day").change(function() {
             if($(this).is(":checked")) {
                 $("[name=startTime],[name=endTime]").val("").attr("disabled", true).removeClass("validate[required]");
+                $("[name=startTime]").validationEngine("hide");
+                $("[name=endTime]").validationEngine("hide");
             } else {
                 $("[name=startTime],[name=endTime]").removeAttr("disabled").addClass("validate[required]");
             }

@@ -59,7 +59,7 @@ $.app = {
             //构造模态窗口
             $.app.modalDialog("新增日历",url,{
                 width:370,
-                height:630,
+                height:430,
                 ok : function(modal) {
 
                     var form = modal.find("#editForm");
@@ -101,7 +101,7 @@ $.app = {
             title : title,
             closeText : "关闭",
             closeOnEscape:false,
-            height:400,
+            height:300,
             width:600,
             modal:true,
             noTitle : false,
@@ -150,7 +150,9 @@ $.app = {
             headers:{table:true}
         }).done(function(data) {
             var div = $("<div></div>").append(data);
-            var dialog = div.dialog(settings);
+            var dialog = div.dialog(settings)
+                .closest(".ui-dialog").data("url", url).removeClass("ui-widget-content")
+                .find(".ui-dialog-content ").removeClass("ui-widget-content").focus();
 
             if(settings.noTitle) {
                 dialog.closest(".ui-dialog").find(".ui-dialog-titlebar").addClass("no-title");
@@ -161,5 +163,31 @@ $.app = {
             }
             $.app._modalDialogQueue.push(dialog);
         });
-    }
+    },
+
+    initDatetimePicker : function() {
+        //初始化 datetime picker
+        $('.date:not(.custom)').each(function() {
+            var $date = $(this);
+
+            if($date.attr("initialized") == "true") {
+                return;
+            }
+
+            var pickDate = $(this).find("[data-format]").data("format").toLowerCase().indexOf("yyyy-mm-dd") != -1;
+            var pickTime = $(this).find("[data-format]").data("format").toLowerCase().indexOf("hh:mm:ss") != -1;
+            $date.datetimepicker({
+                pickDate : pickDate,
+                pickTime : pickTime,
+                maskInput: true,
+                language:"zh-CN"
+            }).on('changeDate', function(ev) {
+                if(pickTime == false) {
+                    $(this).data("datetimepicker").hide();
+                }
+            });
+            $date.find(":input").click(function() {$date.find(".icon-calendar,.icon-time,.icon-date").click();});
+            $date.attr("initialized", true);
+        });
+    },
 }
