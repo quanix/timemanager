@@ -137,7 +137,9 @@ public class CalendarController {
         }
         model.addAttribute("backgroundColorList", backgroundColorList);
         model.addAttribute("model", calendar);
-        return null;
+
+
+        return "/views/calendar/operateForm.jsp";
     }
 
     /**

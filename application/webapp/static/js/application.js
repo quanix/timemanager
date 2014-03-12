@@ -15,11 +15,11 @@ $.app = {
             events : getCtx()+'/cal/load',
 
             eventDrop: function(event, delta) {
-                alert("drop");
+                moveCalendar(event);
             },
 
             eventClick: function(event, delta) {
-                alert("click");
+                viewCalendar(event);
             },
 
             loading:function(bool) {
@@ -67,19 +67,69 @@ $.app = {
             });
         }
 
+
+        /**
+         * .移动日历
+         * @param event
+         */
+        function moveCalendar(event) {
+            alert('moveCalendar');
+        }
+
+
+        /**
+         * .查看日历
+         * @param event
+         */
+        function viewCalendar(event) {
+            alert('viewCalendar');
+        }
+
     },
 
 
     /** ============================ 模态窗口定义 ============================== **/
+    _modalDialogQueue:null,
 
     modalDialog:function (title,url,settings) {
-
-        alert(url);
-
         var defaultSettings = {
-
+            title : title,
+            closeText : "关闭",
+            closeOnEscape:false,
+            height:300,
+            width:600,
+            modal:true,
+            noTitle : false,
+            close: function() {
+                $(this).closest(".ui-dialog").remove();
+            },
+            _close : function(modal) {
+                $(modal).dialog("close");
+                if($.app._modalDialogQueue.length > 0) {
+                    $.app._modalDialogQueue.pop();
+                }
+            },
+            buttons:{
+                '确定': function() {
+                    if(settings.ok) {
+                        if(settings.ok($(this))) {
+                            settings._close(this);
+                        }
+                    } else {
+                        settings._close(this);
+                    }
+                    if(settings.callback) {
+                        settings.callback();
+                    }
+                },
+                '关闭': function () {
+                    settings._close(this);
+                    if(settings.callback) {
+                        settings.callback();
+                    }
+                }
+            }
         };
-
         if(!settings) {
             settings = {};
         }
@@ -94,7 +144,17 @@ $.app = {
             url:url,
             headers:{table:true}
         }).done(function(data) {
-           alert('done='+data);
+            var div = $("<div></div>").append(data);
+            var dialog = div.dialog(settings);
+
+            if(settings.noTitle) {
+                dialog.closest(".ui-dialog").find(".ui-dialog-titlebar").addClass("no-title");
+            }
+            dialog.closest(".ui-dialog").focus();
+            if(!$.app._modalDialogQueue) {
+                $.app._modalDialogQueue = new Array();
+            }
+            $.app._modalDialogQueue.push(dialog);
         });
     }
 }

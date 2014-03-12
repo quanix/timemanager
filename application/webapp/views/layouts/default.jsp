@@ -33,7 +33,7 @@
         }
 
         #calendar {
-            width: 800px;
+            width: 750px;
             margin: 0 auto;
         }
     </style>
