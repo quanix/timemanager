@@ -59,7 +59,7 @@ public class CalendarController {
     @RequestMapping(value = {"/{index:index;?.*}"})
     public String homepage() {
         logger.info("登陆日历管理首页");
-        return "/views/layouts/default.jsp";
+        return "/views/calendar/index.jsp";
     }
 
 
@@ -119,7 +119,7 @@ public class CalendarController {
             @RequestParam(value = "end", required = false)
             @DateTimeFormat(pattern = dataFormat) Date end,Model model) {
 
-        logger.info("cal->new->get");
+        logger.info("cal->new->get : (start="+start+" , end="+end+")");
 
         Calendar calendar = new Calendar();
         calendar.setLength(1);
