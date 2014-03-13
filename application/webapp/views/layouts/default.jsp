@@ -64,11 +64,7 @@
     </style>
     <script>
 
-        var ctx = '<%=request.getContextPath() %>';
-
-        function getCtx() {
-            return '${ctx}';
-        }
+        var ctx = '${ctx}';
 
         $(document).ready(function() {
             $.app.initCalendar();//初始化日历

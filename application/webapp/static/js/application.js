@@ -192,5 +192,5 @@ $.app = {
             $date.find(":input").click(function() {$date.find(".icon-calendar,.icon-time,.icon-date").click();});
             $date.attr("initialized", true);
         });
-    },
+    }
 }
