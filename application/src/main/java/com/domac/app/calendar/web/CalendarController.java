@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +124,7 @@ public class CalendarController {
 
         Calendar calendar = new Calendar();
         calendar.setLength(1);
-        if(start != null) {
+       /* if(start != null) {
             calendar.setStartdate(start);
             calendar.setLength((int)Math.ceil(1.0 * (end.getTime() - start.getTime()) / oneDayMillis));
             if(DateUtils.isSameDay(start, end)) {
@@ -135,7 +136,7 @@ public class CalendarController {
             if(!"00:00:00".equals(DateFormatUtils.format(end, "HH:mm:ss"))) {
                 calendar.setEndtime(end);
             }
-        }
+        }*/
         model.addAttribute("backgroundColorList", backgroundColorList);
         model.addAttribute("model", calendar);
 
@@ -149,11 +150,21 @@ public class CalendarController {
      */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     @ResponseBody
-    public String updateCal(@ModelAttribute("calendar") Calendar calendar) throws Exception {
+    public String updateCal(HttpServletRequest request) throws Exception {
 
         logger.info("cal->new->post");
         String flag = "0";
-        System.out.println(calendar.toString());
+
+        String title = request.getParameter("title");
+        System.out.println("title:"+title);
+
+        String startdate = request.getParameter("startdate");
+        String enddate = request.getParameter("enddate");
+
+        System.out.println("start:"+startdate);
+        System.out.println("end:"+enddate);
+
+        /*System.out.println(calendar.toString());
 
         if(QueryUtil.isNotEmpty(calendar)
                 && QueryUtil.isNotEmpty(calendar.getTitle())) {
@@ -163,7 +174,7 @@ public class CalendarController {
             }catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         return flag;
     }
 

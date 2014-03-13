@@ -26,7 +26,7 @@ public class CalendarDaoTest extends TransactionalTestCase {
     @Before
     public void insert() {
         System.out.println("--------------");
-        //calendarDao.deleteAll();
+        calendarDao.deleteAll();
 
     }
 
