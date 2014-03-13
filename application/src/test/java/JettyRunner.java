@@ -19,13 +19,14 @@ public class JettyRunner {
      */
     private static final int PORT = 9394;//应用端口
     private static final String CONTEXT = "/tm";//上下文名称
+    public static final String[] TLD_JAR_NAMES = new String[] { "sitemesh", "spring-webmvc", "shiro-web"};
 
     public static void main(String[] args) throws Exception {
 
         Profiles.setProfileAsSystemProperty(Profiles.DEVELOPMENT);
 
         Server server = JettyFactory.createServer(PORT, CONTEXT);//创建服务
-        JettyFactory.setTldNames(server, new String[] {"spring-webmvc"});//设置JARS...
+        JettyFactory.setTldNames(server, TLD_JAR_NAMES);//设置JARS...
 
         try {
             //当控制台中输入回车的时候,应用重启
