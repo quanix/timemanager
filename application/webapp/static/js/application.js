@@ -12,7 +12,7 @@ $.app = {
                 right: 'agendaDay,agendaWeek,month'
             },
 
-            events : getCtx()+'/cal/load',
+            events : ctx+'/cal/load',
 
             eventDrop: function(event, delta) {
                 moveCalendar(event);
@@ -49,7 +49,7 @@ $.app = {
          * @param end
          */
         function openNewCalendarForm(start, end) {
-            var url = getCtx()+ '/cal/new';
+            var url = ctx+ '/cal/new';
             //构造传递的地址
             if(start) {
                 start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
@@ -63,7 +63,10 @@ $.app = {
                 ok : function(modal) {
 
                     var form = modal.find("#editForm");
-                    var url = getCtx() + "/cal/new";
+                    if(!form.validationEngine('validate')) {
+                        return false;
+                    }
+                    var url = ctx + "/cal/new";
                     $.post(url, form.serialize(), function() {
                         calendar.fullCalendar("refetchEvents");
                     });
