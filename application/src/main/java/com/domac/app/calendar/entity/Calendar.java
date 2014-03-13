@@ -33,7 +33,7 @@ public class Calendar extends AbstractEntity {
     /**
      * 开始日期
      */
-    private Date startdate;
+    private String startdate;
 
     /**
      * 持续时候
@@ -43,12 +43,12 @@ public class Calendar extends AbstractEntity {
     /**
      * 开始时间
      */
-    private Date starttime;
+    private String starttime;
 
     /**
      * 结束时间
      */
-    private Date endtime;
+    private String endtime;
 
     /**
      * 背景颜色
@@ -85,11 +85,11 @@ public class Calendar extends AbstractEntity {
         this.details = details;
     }
 
-    public Date getStartdate() {
+    public String getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(Date startdate) {
+    public void setStartdate(String startdate) {
         this.startdate = startdate;
     }
 
@@ -101,19 +101,19 @@ public class Calendar extends AbstractEntity {
         this.length = length;
     }
 
-    public Date getStarttime() {
+    public String getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Date starttime) {
+    public void setStarttime(String starttime) {
         this.starttime = starttime;
     }
 
-    public Date getEndtime() {
+    public String getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Date endtime) {
+    public void setEndtime(String endtime) {
         this.endtime = endtime;
     }
 
@@ -142,6 +142,7 @@ public class Calendar extends AbstractEntity {
         sb.append("details = "+details+"\n");
         sb.append("startdate = "+startdate+"\n");
         sb.append("starttime = "+starttime+"\n");
+        sb.append("endtime = "+endtime+"\n");
         sb.append("backgroundcolor = "+backgroundcolor+"\n");
         sb.append("textcolor = "+textcolor+"\n");
         return sb.toString();

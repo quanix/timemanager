@@ -39,6 +39,25 @@
 
 
         <div class="clearfix">
+            <form:label path="starttime" cssStyle="width: 60px;text-align: right;">开始时间：</form:label>
+            <span class="input-append date">
+                <form:input path="starttime" cssClass="validate[required]"  cssStyle="width: 180px;"
+                            data-position="bottom-left" data-format="hh:mm:ss"/>
+                <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+            </span>
+        </div>
+
+        <div class="clearfix">
+            <form:label path="endtime"  cssStyle="width: 60px;text-align: right;">结束时间：</form:label>
+            <span class="input-append date">
+                <form:input path="endtime" cssClass="validate[required]" cssStyle="width: 180px;"
+                            data-position="bottom-left" data-format="hh:mm:ss"/>
+                <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+            </span>
+        </div>
+
+
+        <div class="clearfix">
             <form:label path="backgroundcolor" cssStyle="width: 60px;text-align: right;">背景颜色：</form:label>
             <select id="backgroundcolor" name="backgroundcolor" style="background: ${backgroundcolorList[0]}">
                 <c:forEach items="${backgroundColorList}" var="c">

@@ -80,7 +80,28 @@ public class CalendarController {
             public Map apply(Calendar calendar) {
                 Map resultMap = Maps.newHashMap();
 
-                Date startDate = new Date(calendar.getStartdate().getTime());
+                //整理开始时间
+                String tempStartTime = "00:00:00";
+                String startDate = calendar.getStartdate();
+                if(QueryUtil.isNotEmpty(calendar.getStarttime())) {
+                    tempStartTime = calendar.getStarttime();
+                }
+                startDate += " "+tempStartTime;
+
+                //整理结束时间
+                String tempEndTime = "00:00:00";
+
+
+
+                if(StringUtils.isNotEmpty(calendar.getBackgroundcolor())) {
+                    resultMap.put("backgroundColor", calendar.getBackgroundcolor());
+                    resultMap.put("borderColor", calendar.getBackgroundcolor());
+                }
+                if(StringUtils.isNotEmpty(calendar.getTextcolor())) {
+                    resultMap.put("textColor", calendar.getTextcolor());
+                }
+
+                /*Date startDate = new Date(calendar.getStartdate().getTime());
                 Date endDate = DateUtils.addDays(startDate, calendar.getLength() - 1);
                 boolean allDays = calendar.getStarttime() == null && calendar.getEndtime() == null;
                 if(!allDays) {
@@ -103,7 +124,7 @@ public class CalendarController {
                 }
                 if(StringUtils.isNotEmpty(calendar.getTextcolor())) {
                     resultMap.put("textColor", calendar.getTextcolor());
-                }
+                }*/
                 return resultMap;
             }
         });
@@ -115,28 +136,31 @@ public class CalendarController {
      */
     @RequestMapping(value = "/new",method = RequestMethod.GET)
     public String initNewCal(
-            @RequestParam(value = "start", required = false)
-            @DateTimeFormat(pattern = dataFormat) Date start,
-            @RequestParam(value = "end", required = false)
-            @DateTimeFormat(pattern = dataFormat) Date end,Model model) {
+            @RequestParam(value = "start", required = false)String start,
+            @RequestParam(value = "end", required = false)String end,Model model) {
 
         logger.info("cal->new->get : (start="+start+" , end="+end+")");
 
         Calendar calendar = new Calendar();
         calendar.setLength(1);
-       /* if(start != null) {
-            calendar.setStartdate(start);
-            calendar.setLength((int)Math.ceil(1.0 * (end.getTime() - start.getTime()) / oneDayMillis));
-            if(DateUtils.isSameDay(start, end)) {
-                calendar.setLength(1);
+
+        try {
+            Date startDate = DateUtils.parseDate(start,"yyyy-MM-dd HH:mm:ss");
+            Date endDate = DateUtils.parseDate(end,"yyyy-MM-dd HH:mm:ss");
+            if(start != null) {
+                calendar.setStartdate(DateFormatUtils.format(startDate,"yyyy-MM-dd"));
+                calendar.setLength((int)Math.ceil(1.0 * (endDate.getTime() - startDate.getTime()) / oneDayMillis));
+                if(DateUtils.isSameDay(startDate, endDate)) {
+                    calendar.setLength(1);
+                }
+                String startTimeStr  =   DateFormatUtils.format(startDate,"HH:mm:ss");
+                String endTimeStr  =   DateFormatUtils.format(endDate,"HH:mm:ss");
+                calendar.setStarttime(startTimeStr);
+                calendar.setEndtime(endTimeStr);
             }
-            if(!"00:00:00".equals(DateFormatUtils.format(start, "HH:mm:ss"))) {
-                calendar.setStarttime(start);
-            }
-            if(!"00:00:00".equals(DateFormatUtils.format(end, "HH:mm:ss"))) {
-                calendar.setEndtime(end);
-            }
-        }*/
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         model.addAttribute("backgroundColorList", backgroundColorList);
         model.addAttribute("model", calendar);
 
@@ -150,22 +174,11 @@ public class CalendarController {
      */
     @RequestMapping(value = "/new",method = RequestMethod.POST)
     @ResponseBody
-    public String updateCal(HttpServletRequest request) throws Exception {
+    public String updateCal(@ModelAttribute("calendar") Calendar calendar) throws Exception {
 
         logger.info("cal->new->post");
         String flag = "0";
-
-        String title = request.getParameter("title");
-        System.out.println("title:"+title);
-
-        String startdate = request.getParameter("startdate");
-        String enddate = request.getParameter("enddate");
-
-        System.out.println("start:"+startdate);
-        System.out.println("end:"+enddate);
-
-        /*System.out.println(calendar.toString());
-
+        System.out.println(calendar.toString());
         if(QueryUtil.isNotEmpty(calendar)
                 && QueryUtil.isNotEmpty(calendar.getTitle())) {
             try {
@@ -174,7 +187,7 @@ public class CalendarController {
             }catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/
+        }
         return flag;
     }
 

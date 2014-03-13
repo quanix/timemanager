@@ -5,10 +5,10 @@ create table  t_app_calendar(
 	userid varchar(64), --用户编号
 	title varchar(255) not null,
 	details varchar(255),
-	startdate timestamp,
+	startdate varchar(64),
 	length int,
-	starttime timestamp,
-	endtime timestamp,
+	starttime varchar(64),
+	endtime varchar(64),
 	backgroundcolor varchar(64),
 	textcolor varchar(64),
 	primary key (id)
