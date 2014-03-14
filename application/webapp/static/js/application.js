@@ -90,11 +90,105 @@ $.app = {
          * @param event
          */
         function viewCalendar(event) {
-            alert('viewCalendar');
+            var url = ctx + "/cal/view/" + event.id;
+            $.app.modalDialog("查看计划信息", url, {
+                width:370,
+                height:250,
+                noTitle : false,
+                okBtn : false,
+                closeBtn : false
+            });
         }
+        $("body").on("click", ".btn-delete-calendar", function() {
+            var $this = $(this);
+            $.app.confirm({
+                title : '确认删除提醒事项吗？',
+                message : '确认删除提醒事项吗？',
+                ok : function(modal) {
+                    var url = ctx + "/cal/delete?id=" + $this.data("id");
+                    $.post(url, function() {
+                        calendar.fullCalendar("refetchEvents");
+                    });
+                    return true;
+                }
+            });
+        });
 
     },
 
+    /**
+     * 格式
+     * @param options
+     */
+    confirm : function(options) {
+        var defaults = {
+            title : "确认执行操作",
+            message : "确认执行操作吗？",
+            cancelTitle : '取消',
+            okTitle : '确定',
+            cancel : $.noop,
+            ok : $.noop,
+            alert : false
+        };
+
+        if(!options) {
+            options = {};
+        }
+        options = $.extend({}, defaults, options);
+
+        var template =
+            '<div class="modal hide fade confirm">' +
+                '<div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h3 class="title">{title}</h3>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                '<div>{message}</div>' +
+                '</div>' +
+                '<div class="modal-footer">' +
+                '<a href="#" class="btn btn-ok btn-danger" data-dismiss="modal">{okTitle}</a>' +
+                '<a href="#" class="btn btn-cancel" data-dismiss="modal">{cancelTitle}</a>'+
+                '</div>' +
+                '</div>';
+
+        var modalDom =
+            $(template
+                .replace("{title}", options.title)
+                .replace("{message}", options.message)
+                .replace("{cancelTitle}", options.cancelTitle)
+                .replace("{okTitle}", options.okTitle));
+
+
+        var hasBtnClick = false;
+        if(options.alert) {
+            modalDom.find(".modal-footer > .btn-cancel").remove();
+        } else {
+            modalDom.find(".modal-footer > .btn-cancel").click(function() {
+                hasBtnClick = true;
+                options.cancel();
+            });
+        }
+        modalDom.find(".modal-footer > .btn-ok").click(function() {
+            hasBtnClick = true;
+            options.ok();
+        });
+
+        var modal = modalDom.modal();
+
+        modal.on("hidden", function() {
+            modal.remove();//移除掉 要不然 只是hidden
+            if(hasBtnClick) {
+                return true;
+            }
+            if(options.alert) {
+                options.ok();
+            } else {
+                options.cancel();
+            }
+        });
+
+        return modal;
+    },
 
     /** ============================ 模态窗口定义 ============================== **/
     _modalDialogQueue:null,

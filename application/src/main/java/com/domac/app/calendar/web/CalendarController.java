@@ -189,6 +189,16 @@ public class CalendarController {
         return flag;
     }
 
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String viewCalendar(@PathVariable("id") String id, Model model) {
+
+        Calendar calendar = calendarService.getById(id);
+        if(QueryUtil.isNotEmpty(calendar)) {
+            model.addAttribute("calendar", calendar);
+        }
+        return "/views/calendar/viewForm.jsp";
+    }
+
 
     /**
      * 删除主键为{id}的日历

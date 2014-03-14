@@ -49,4 +49,8 @@ public class CalendarService {
     public List<Calendar> getAll() throws Exception {
         return (List<Calendar>)calendarDao.findAll();
     }
+
+    public Calendar getById(String id) {
+        return calendarDao.findOne(id);
+    }
 }
