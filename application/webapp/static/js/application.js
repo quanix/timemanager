@@ -102,8 +102,8 @@ $.app = {
         $("body").on("click", ".btn-delete-calendar", function() {
             var $this = $(this);
             $.app.confirm({
-                title : '确认删除提醒事项吗？',
-                message : '确认删除提醒事项吗？',
+                title : '确认删除计划事项吗？',
+                message : '确认删除计划事项吗？',
                 ok : function(modal) {
                     var url = ctx + "/cal/delete?id=" + $this.data("id");
                     $.post(url, function() {
