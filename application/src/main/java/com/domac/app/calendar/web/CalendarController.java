@@ -79,52 +79,50 @@ public class CalendarController {
             @Override
             public Map apply(Calendar calendar) {
                 Map resultMap = Maps.newHashMap();
+                /**
+                 * 整理结束时间
+                 */
+                try {
 
-                //整理开始时间
-                String tempStartTime = "00:00:00";
-                String startDate = calendar.getStartdate();
-                if(QueryUtil.isNotEmpty(calendar.getStarttime())) {
-                    tempStartTime = calendar.getStarttime();
+                    /**
+                     * 整理开始时间
+                     */
+                    String tempStartTime = "00:00:00";
+                    String startDate = calendar.getStartdate();
+                    if(QueryUtil.isNotEmpty(calendar.getStarttime())) {
+                        tempStartTime = calendar.getStarttime();
+                    }
+
+                    //标准格式 yyyy-MM-dd HH:mm:ss
+                    startDate += " "+tempStartTime;
+
+                    Date startStandardDate = DateUtils.parseDate(startDate,"yyyy-MM-dd HH:mm:ss");
+                    Date endStandardDate = DateUtils.addDays(startStandardDate, calendar.getLength() - 1);
+                    Date endDate = DateUtils.parseDate(calendar.getEndtime(),"HH:mm:ss");
+                    boolean allDays = calendar.getStarttime() == null && calendar.getEndtime() == null;
+                    if(!allDays) {
+                        endStandardDate.setHours(endDate.getHours());
+                        endStandardDate.setMinutes(endDate.getMinutes());
+                        endStandardDate.setSeconds(endDate.getSeconds());
+                    }
+
+                    resultMap.put("id", calendar.getId());
+                    resultMap.put("start", startDate);
+                    resultMap.put("end", DateFormatUtils.format(endStandardDate, "yyyy-MM-dd HH:mm:ss"));
+                    resultMap.put("allDay", allDays);
+                    resultMap.put("title", calendar.getTitle());
+
+                    if(StringUtils.isNotEmpty(calendar.getBackgroundcolor())) {
+                        resultMap.put("backgroundColor", calendar.getBackgroundcolor());
+                        resultMap.put("borderColor", calendar.getBackgroundcolor());
+                    }
+                    if(StringUtils.isNotEmpty(calendar.getTextcolor())) {
+                        resultMap.put("textColor", calendar.getTextcolor());
+                    }
+
+                }catch (Exception e) {
+                    e.printStackTrace();
                 }
-                startDate += " "+tempStartTime;
-
-                //整理结束时间
-                String tempEndTime = "00:00:00";
-
-
-
-                if(StringUtils.isNotEmpty(calendar.getBackgroundcolor())) {
-                    resultMap.put("backgroundColor", calendar.getBackgroundcolor());
-                    resultMap.put("borderColor", calendar.getBackgroundcolor());
-                }
-                if(StringUtils.isNotEmpty(calendar.getTextcolor())) {
-                    resultMap.put("textColor", calendar.getTextcolor());
-                }
-
-                /*Date startDate = new Date(calendar.getStartdate().getTime());
-                Date endDate = DateUtils.addDays(startDate, calendar.getLength() - 1);
-                boolean allDays = calendar.getStarttime() == null && calendar.getEndtime() == null;
-                if(!allDays) {
-                    startDate.setHours(calendar.getStarttime().getHours());
-                    startDate.setMinutes(calendar.getStarttime().getMinutes());
-                    startDate.setSeconds(calendar.getStarttime().getSeconds());
-                    endDate.setHours(calendar.getEndtime().getHours());
-                    endDate.setMinutes(calendar.getEndtime().getMinutes());
-                    endDate.setSeconds(calendar.getEndtime().getSeconds());
-                }
-                resultMap.put("id", calendar.getId());
-                resultMap.put("start", DateFormatUtils.format(startDate, "yyyy-MM-dd HH:mm:ss"));
-                resultMap.put("end", DateFormatUtils.format(endDate, "yyyy-MM-dd HH:mm:ss"));
-                resultMap.put("allDay", allDays);
-                resultMap.put("title", calendar.getTitle());
-                resultMap.put("details", calendar.getDetails());
-                if(StringUtils.isNotEmpty(calendar.getBackgroundcolor())) {
-                    resultMap.put("backgroundColor", calendar.getBackgroundcolor());
-                    resultMap.put("borderColor", calendar.getBackgroundcolor());
-                }
-                if(StringUtils.isNotEmpty(calendar.getTextcolor())) {
-                    resultMap.put("textColor", calendar.getTextcolor());
-                }*/
                 return resultMap;
             }
         });
