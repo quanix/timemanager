@@ -57,7 +57,7 @@ $.app = {
                 url = url + "?start=" + start + "&end=" + end;
             }
             //构造模态窗口
-            $.app.modalDialog("新增日历",url,{
+            $.app.modalDialog("新增计划",url,{
                 width:370,
                 height:430,
                 ok : function(modal) {
