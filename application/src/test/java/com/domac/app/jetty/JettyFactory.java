@@ -16,7 +16,10 @@ import java.util.List;
 public class JettyFactory {
 
     private static final String WEB_PATH = "application/webapp";
-    private static final String WEBDEFAULT_PATH = "application/webapp/WEB-INF/classes/jetty/webdefault-windows.xml";
+
+    //private static final String WEBDEFAULT_PATH = "application/webapp/WEB-INF/classes/jetty/webdefault-windows.xml";
+    //使用默认路径
+    private static final String WEBDEFAULT_PATH = "application/target/test-classes/jetty/webdefault-windows.xml";
 
     /**
      * 创建Jetty的Server

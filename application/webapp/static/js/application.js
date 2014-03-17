@@ -109,6 +109,7 @@ $.app = {
                     $.post(url, function() {
                         calendar.fullCalendar("refetchEvents");
                     });
+                   $(".ui-icon-closethick").click();//修复删除事项，提示窗口没有关闭的情况
                     return true;
                 }
             });
