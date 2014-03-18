@@ -111,7 +111,7 @@ $.app = {
                     });
                     //修复删除事项， 提示窗口没有关闭的情况
                     //ok响应的时候点击X按钮，关闭查看事项窗口
-                   $(".ui-icon-closethick").click();
+                    $(".ui-icon-closethick").click();
                     return true;
                 }
             });
