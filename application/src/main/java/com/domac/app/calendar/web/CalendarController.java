@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +125,7 @@ public class CalendarController {
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
+//                logger.info("resultMap.toString()>>>>>"+resultMap.toString());
                 return resultMap;
             }
         });
@@ -210,6 +213,45 @@ public class CalendarController {
     public String deleteCal(String id) {
         calendarService.delete(id);
         return "1";
+    }
+
+    /**
+     *   不懂那个时间怎么个存储，现在只有时间的长度为1结果才正确，等待quanet修改。
+     * 删除主键为{id}的日历 ,{day}变化时间，目前移动的值只可以是天的整数
+     * @param id
+     * @param day
+     * @return
+     */
+    @RequestMapping(value ="/update/{id}/{day}", method = RequestMethod.POST)
+    @ResponseBody
+    public String update(@PathVariable("id") String id,@PathVariable("day") int day) {
+        if(day == 0) return "1";
+        logger.info("is enter");
+        Calendar calendar = calendarService.getById(id);
+        logger.info(calendar + "");
+        String ret = "1";
+
+        String tempStartTime = "00:00:00";
+        String startDate = calendar.getStartdate();
+        if(QueryUtil.isNotEmpty(calendar.getStarttime())) {
+            tempStartTime = calendar.getStarttime();
+        }
+
+        //标准格式 yyyy-MM-dd HH:mm:ss
+        startDate += " "+tempStartTime;
+
+        Date startStandardDate = null;
+        try {
+            startStandardDate = DateUtils.parseDate(startDate, "yyyy-MM-dd HH:mm:ss");
+            Date newStartStandardDate = DateUtils.addDays(startStandardDate, calendar.getLength() + day- 1);
+            calendar.setStartdate(new SimpleDateFormat("yyyy-MM-dd").format(newStartStandardDate));
+            calendarService.update(calendar);
+        } catch (Exception e) {
+            ret = "error";
+            e.printStackTrace();
+        }
+
+        return ret;
     }
 
 }

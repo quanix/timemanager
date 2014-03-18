@@ -20,7 +20,7 @@
 	<div class="container">
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
 		<div id="content">
-			<sitemesh:body/>
+			<sitemesh:body/>  <%--拿index.jsp嵌入 默认所有页面都会有这个头和尾--%>
 		</div>
 		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 	</div>

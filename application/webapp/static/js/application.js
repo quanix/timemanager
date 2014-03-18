@@ -14,8 +14,18 @@ $.app = {
 
             events : ctx+'/cal/load',
 
-            eventDrop: function(event, delta) {
-                moveCalendar(event);
+            eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+
+                if(confirm(" 你确定要修改该事项? ")) {
+                    var url = ctx + "/cal/update/" + event.id + "/"+dayDelta;
+//                    alert("url>>"+url);
+                    $.post(url, function() {
+                        calendar.fullCalendar("refetchEvents");
+                    });
+                }  else {
+                    revertFunc();  //复位
+                }
+
             },
 
             eventClick: function(event, delta) {
@@ -80,8 +90,9 @@ $.app = {
          * .移动日历
          * @param event
          */
-        function moveCalendar(event) {
-            alert('moveCalendar');
+        function moveCalendar(event,delta) {
+//            alert('moveCalendar');
+            var str = event.id;
         }
 
 
