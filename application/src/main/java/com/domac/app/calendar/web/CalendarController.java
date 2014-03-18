@@ -225,8 +225,9 @@ public class CalendarController {
     @RequestMapping(value ="/update/{id}/{day}", method = RequestMethod.POST)
     @ResponseBody
     public String update(@PathVariable("id") String id,@PathVariable("day") int day) {
-        if(day == 0) return "1";
         logger.info("is enter");
+        if(day == 0) return "1";
+
         Calendar calendar = calendarService.getById(id);
         logger.info(calendar + "");
         String ret = "1";
@@ -243,7 +244,10 @@ public class CalendarController {
         Date startStandardDate = null;
         try {
             startStandardDate = DateUtils.parseDate(startDate, "yyyy-MM-dd HH:mm:ss");
-            Date newStartStandardDate = DateUtils.addDays(startStandardDate, calendar.getLength() + day- 1);
+            Date newStartStandardDate = DateUtils.addDays(startStandardDate, day);
+//            logger.info("day>>>>>"+day);
+//            logger.info("old day>>>>" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(startStandardDate));
+//            logger.info("new day>>>>" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(newStartStandardDate));
             calendar.setStartdate(new SimpleDateFormat("yyyy-MM-dd").format(newStartStandardDate));
             calendarService.update(calendar);
         } catch (Exception e) {
