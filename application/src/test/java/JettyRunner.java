@@ -29,7 +29,7 @@ public class JettyRunner {
         JettyFactory.setTldNames(server, TLD_JAR_NAMES);//设置JARS...
 
         try {
-            //当控制台中输入回车的时候,应用重启
+            //当控制台中输入回车的时候,应用重启     提交测试
 
             server.start();
             System.out.println("====application start success!url: http://localhost:" + PORT + CONTEXT);
