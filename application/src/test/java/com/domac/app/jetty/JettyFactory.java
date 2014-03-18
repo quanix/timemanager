@@ -17,13 +17,13 @@ public class JettyFactory {
 
     private static final String WEB_PATH = "application/webapp";
 
-    //private static final String WEBDEFAULT_PATH = "application/webapp/WEB-INF/classes/jetty/webdefault-windows.xml";
+    private static final String WEBDEFAULT_PATH = "application/webapp/WEB-INF/classes/jetty/webdefault-windows.xml";
     //使用 默认路径
     /**
      * 新建项目的时候这个xml默认就放在test下面，所以IDE默认也在test下面
      * 你也可以切换回原来的path，上面注释的代码
      */
-    private static final String WEBDEFAULT_PATH = "application/target/test-classes/jetty/webdefault-windows.xml";
+    //private static final String WEBDEFAULT_PATH = "application/target/test-classes/jetty/webdefault-windows.xml";
 
     /**
      * 创建Jetty的Server
