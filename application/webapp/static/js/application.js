@@ -18,7 +18,7 @@ $.app = {
 
                 if(confirm(" 你确定要修改该事项? ")) {
                     var url = ctx + "/cal/update/" + event.id + "/"+dayDelta;
-//                    alert("url>>"+url);
+//                    alert("url>>"+url );
                     $.post(url, function() {
                         calendar.fullCalendar("refetchEvents");
                     });

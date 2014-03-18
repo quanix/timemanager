@@ -217,7 +217,7 @@ public class CalendarController {
 
     /**
      *   不懂那个时间怎么个存储，现在只有时间的长度为1结果才正确，等待quanet修改。
-     * 删除主键为{id}的日历 ,{day}变化时间，目前移动的值只可以是天的整数
+     * 删除主键为{id}的日历 ,{day}变化时间，目前移动的值只可以是天的整数 ,
      * @param id
      * @param day
      * @return
