@@ -99,7 +99,7 @@ public class CalendarController {
                     startDate += " "+tempStartTime;
 
                     Date startStandardDate = DateUtils.parseDate(startDate,"yyyy-MM-dd HH:mm:ss");
-                    Date endStandardDate = DateUtils.addDays(startStandardDate, calendar.getLength() - 1);
+                    Date endStandardDate = DateUtils.addDays(startStandardDate, calendar.getLength());
                     Date endDate = DateUtils.parseDate(calendar.getEndtime(),"HH:mm:ss");
                     boolean allDays = calendar.getStarttime() == null && calendar.getEndtime() == null;
                     if(!allDays) {
@@ -150,7 +150,7 @@ public class CalendarController {
             Date endDate = DateUtils.parseDate(end,"yyyy-MM-dd HH:mm:ss");
             if(start != null) {
                 calendar.setStartdate(DateFormatUtils.format(startDate,"yyyy-MM-dd"));
-                calendar.setLength((int)Math.ceil(1.0 * (endDate.getTime() - startDate.getTime()) / oneDayMillis));
+                calendar.setLength((int)Math.ceil(1.0 * (endDate.getTime() - startDate.getTime()) / oneDayMillis) +1);
                 if(DateUtils.isSameDay(startDate, endDate)) {
                     calendar.setLength(1);
                 }
