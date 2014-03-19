@@ -16,15 +16,22 @@ $.app = {
 
             eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
 
-                if(confirm(" 你确定要修改该事项? ")) {
-                    var url = ctx + "/cal/update/" + event.id + "/"+dayDelta;
+                $.app.confirm({  //使用quaent提供的确认窗口,风格统一
+                    title : '你确定要修改该事项？',
+                    message : '你确定要修改该事项？',
+                    ok : function(modal) {
+                        var url = ctx + "/cal/update/" + event.id + "/"+dayDelta;
 //                    alert("url>>"+url );
-                    $.post(url, function() {
-                        calendar.fullCalendar("refetchEvents");
-                    });
-                }  else {
-                    revertFunc();  //复位
-                }
+                        $.post(url, function() {
+                            calendar.fullCalendar("refetchEvents");
+                        });
+                        return true;
+                    },
+                    cancel: function(modal){
+                        revertFunc();  //复位
+                        return false;
+                    }
+                });
 
             },
 
