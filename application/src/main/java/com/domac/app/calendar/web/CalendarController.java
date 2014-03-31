@@ -150,10 +150,15 @@ public class CalendarController {
             Date endDate = DateUtils.parseDate(end,"yyyy-MM-dd HH:mm:ss");
             if(start != null) {
                 calendar.setStartdate(DateFormatUtils.format(startDate,"yyyy-MM-dd"));
-                calendar.setLength((int)Math.ceil(1.0 * (endDate.getTime() - startDate.getTime()) / oneDayMillis) +1);
-                if(DateUtils.isSameDay(startDate, endDate)) {
-                    calendar.setLength(1);
+                if(!DateUtils.isSameDay(startDate,endDate)){
+                    calendar.setLength((int)Math.ceil(1.0 * (endDate.getTime() - startDate.getTime()) / oneDayMillis) +1);
+                } else {
+                    calendar.setLength(0);
                 }
+                //持续时间为同一天的情况下，持续长度不应该为1，应该为0
+                /*if(DateUtils.isSameDay(startDate, endDate)) {
+                    calendar.setLength(1);
+                }*/
                 String startTimeStr  =   DateFormatUtils.format(startDate,"HH:mm:ss");
                 String endTimeStr  =   DateFormatUtils.format(endDate,"HH:mm:ss");
                 calendar.setStarttime(startTimeStr);
