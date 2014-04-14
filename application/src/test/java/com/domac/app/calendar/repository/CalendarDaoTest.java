@@ -1,6 +1,7 @@
-package com.domac.app.calendar.repositoty;
+package com.domac.app.calendar.repository;
 
 import com.domac.app.calendar.entity.Calendar;
+import com.domac.app.calendar.repositoty.CalendarDao;
 import com.domac.app.testcase.TransactionalTestCase;
 import org.junit.Before;
 import org.junit.Test;
