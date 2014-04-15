@@ -1,3 +1,4 @@
+--drop table if exists s_user;
 
 -- .日历表
 create table  t_app_calendar(
@@ -22,7 +23,7 @@ create table s_user(
     password       varchar(255) not null,
     salt           varchar(64) not null,
     email          varchar(255),
-    register_date   timestamp not null default 0,
+    register_date   timestamp,
     status         varchar(64),
     primary key (id)
 );
