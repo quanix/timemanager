@@ -1,7 +1,6 @@
-package com.domac.app.system.repository;
+package com.domac.app.system.service;
 
 import com.domac.app.system.entity.User;
-import com.domac.app.system.service.UserService;
 import com.domac.app.testcase.TransactionalTestCase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
