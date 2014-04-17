@@ -12,8 +12,8 @@ import java.util.concurrent.Executors;
  */
 public abstract class ConcurrentBenchmark {
 
-    public static final String THREAD_COUNT_NAME = "benchmark.thread.count";
-    public static final String LOOP_COUNT_NAME = "benchmark.loop.count";
+    private static final String THREAD_COUNT_NAME = "benchmark.thread.count";
+    private static final String LOOP_COUNT_NAME = "benchmark.loop.count";
 
     public int threadCount;
     public long loopCount;
@@ -63,8 +63,12 @@ public abstract class ConcurrentBenchmark {
                 benchmarkTask.parent = this;
                 executorService.execute(benchmarkTask);
             }
+
             startLock.await();
+            printStartMessage();//打印启动消息
+
             finishLock.await();
+            printFinishMessage();//打印结束消息
 
         }finally {
             executorService.shutdownNow();
