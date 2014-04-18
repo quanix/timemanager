@@ -21,6 +21,8 @@ public abstract class ConcurrentBenchmark {
     public CountDownLatch startLock;
     public CountDownLatch finishLock;
 
+    public CountDownLatch latch = new CountDownLatch(1);
+
 
     public Date startTime;
     public int intervalMillis = 10 * 1000;
@@ -66,6 +68,8 @@ public abstract class ConcurrentBenchmark {
 
             startLock.await();
             printStartMessage();//打印启动消息
+
+            latch.countDown();
 
             finishLock.await();
             printFinishMessage();//打印结束消息

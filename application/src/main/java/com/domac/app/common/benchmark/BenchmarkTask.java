@@ -16,8 +16,11 @@ public abstract class BenchmarkTask implements Runnable {
         onThreadStart();
         try {
             for(int i = 0; i< parent.loopCount;i++) {
+                parent.latch.await();
                 execute(i);
             }
+        }catch (Exception e) {
+
         }finally { //进行相关注销操作
             tearDown();
             onThreadFinish();

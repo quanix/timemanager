@@ -5,7 +5,7 @@ package com.domac.app.common.benchmark;
  */
 public class CounterBanchmark extends ConcurrentBenchmark {
 
-    private static final int DEFAULT_THREAD_COUNT = 2;
+    private static final int DEFAULT_THREAD_COUNT = 10;
     private static final int DEFAULT_LOOP_COUNT = 2;
 
 
