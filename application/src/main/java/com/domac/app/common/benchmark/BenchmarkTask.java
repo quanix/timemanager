@@ -16,7 +16,7 @@ public abstract class BenchmarkTask implements Runnable {
         onThreadStart();
         try {
             for(int i = 0; i< parent.loopCount;i++) {
-                parent.latch.await();
+                parent.latch.await();//调用上级的辅助latch,防止"偷跑"的情况
                 execute(i);
             }
         }catch (Exception e) {

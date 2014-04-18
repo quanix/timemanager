@@ -21,7 +21,7 @@ public abstract class ConcurrentBenchmark {
     public CountDownLatch startLock;
     public CountDownLatch finishLock;
 
-    public CountDownLatch latch = new CountDownLatch(1);
+    public CountDownLatch latch = new CountDownLatch(1); //辅助CountDownLatch
 
 
     public Date startTime;
