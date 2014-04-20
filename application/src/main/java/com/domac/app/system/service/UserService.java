@@ -75,4 +75,13 @@ public class UserService {
         }
         userDao.save(user);
     }
+
+    /**
+     * 根据登陆名称查找用户
+     * @param loginName
+     * @return
+     */
+    public User findUserByLoginName(String loginName) {
+        return userDao.findByLoginName(loginName);
+    }
 }

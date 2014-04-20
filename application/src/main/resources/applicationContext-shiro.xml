@@ -14,6 +14,7 @@
 
     <!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
     <bean id="userRealm" class="com.domac.app.system.service.UserRealm">
+        <property name="userService" ref="userService"/>
     </bean>
 
     <!-- Shiro Filter -->
