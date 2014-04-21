@@ -29,13 +29,14 @@ public class UserServiceTest extends TransactionalTestCase {
     @Test
     public void testSave() {
         User user = new User();
-        user.setLoginName(RandomData.randomName("user"));
-        user.setUsername(RandomData.randomName("User"));
-        user.setPlainPassword(RandomData.randomName("password"));
+        user.setLoginName("lihaoquan");
+        user.setUsername("quan");
+        user.setPlainPassword("lihaoquan");
 
         userService.registerUser(user);
 
         System.out.println("salt:"+user.getSalt());
+        System.out.println("password:"+user.getPassword());
 
         List<User> users = userService.getAllUser();
         logger.info("users list size:"+users.size());

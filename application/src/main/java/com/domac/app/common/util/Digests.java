@@ -67,7 +67,7 @@ public class Digests {
              byte[] result = messageDigest.digest(input);
              for(int i = 1; i< iterations ; i++) {
                  messageDigest.reset();
-                 result = messageDigest.digest(input);
+                 result = messageDigest.digest(result);
              }
              return result;
          }catch (GeneralSecurityException e) {
