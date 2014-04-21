@@ -99,6 +99,7 @@
                     <div class="control-group">
                         <label class="checkbox remember"><input type="checkbox" name="rememberMe" value="true">下次自动登录</label>
                         <input id="submitForm" type="submit" class="btn btn-login pull-left" value="登录">
+                        <input id="registerForm" type="button" class="btn btn-success pull-left" style="margin-left: 20px;" value="注册">
                     </div>
                 </form>
             </div>

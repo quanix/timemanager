@@ -33,9 +33,6 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             retryCount = new AtomicInteger(0);
             passwordRetryCache.put(username, retryCount);
         }
-
-        System.out.println("retryCount:"+retryCount);
-
         if(retryCount.incrementAndGet() > 5) {
             //if retry count > 5 throw
             System.out.println("密码错误次数达到5次,请一小时后再尝试登录");
