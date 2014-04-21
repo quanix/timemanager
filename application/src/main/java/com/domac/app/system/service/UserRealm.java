@@ -34,16 +34,12 @@ public class UserRealm extends AuthorizingRealm {
             throws AuthenticationException {
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-
-        System.out.println("====进行Shiro验证操作:"+token.getUsername());
         User user = userService.findUserByLoginName(token.getUsername());
         if(null != user) {
-            System.out.println("验证用户!");
             byte[] salt = Encodes.decodeHex(user.getSalt());
             return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getUsername()),
                     user.getPassword(), ByteSource.Util.bytes(salt), getName());
         }else {
-            System.out.println("验证用户为空");
             return null;
         }
     }
@@ -56,17 +52,8 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
-        System.out.println("====进行Shiro授权操作");
         ShiroUser shiroUser = (ShiroUser) principalCollection.getPrimaryPrincipal();
         User user = userService.findUserByLoginName(shiroUser.loginName);
-
-        if(null != user) {
-            System.out.println("授权用户:"+user.getUsername());
-        }else {
-            System.out.println("授权用户为空");
-        }
-
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         return info;
     }
