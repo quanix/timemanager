@@ -15,6 +15,13 @@
     <!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
     <bean id="userRealm" class="com.domac.app.system.service.UserRealm">
         <property name="userService" ref="userService"/>
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <bean id="credentialsMatcher" class="com.domac.app.system.credentials.RetryLimitHashedCredentialsMatcher">
+        <constructor-arg value="SHA-1"/>
+        <property name="hashIterations" value="1024"/>
+        <property name="cacheManager" ref="shiroEhcacheManager" />
     </bean>
 
     <!-- Shiro Filter -->

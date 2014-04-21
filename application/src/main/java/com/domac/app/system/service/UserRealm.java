@@ -10,7 +10,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
@@ -67,7 +66,7 @@ public class UserRealm extends AuthorizingRealm {
     /**
      * 设定Password校验的Hash算法与迭代次数.
      */
-    @PostConstruct
+    //@PostConstruct
     public void initCredentialsMatcher() {
         HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(UserService.HASH_ALGORITHM);
         matcher.setHashIterations(UserService.HASH_INTERATIONS);
@@ -134,4 +133,5 @@ public class UserRealm extends AuthorizingRealm {
             return true;
         }
     }
+
 }
