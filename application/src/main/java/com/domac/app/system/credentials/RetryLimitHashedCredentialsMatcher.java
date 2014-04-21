@@ -1,7 +1,6 @@
 package com.domac.app.system.credentials;
 
 import com.domac.app.common.util.QueryUtil;
-import com.domac.app.system.service.UserRealm;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
