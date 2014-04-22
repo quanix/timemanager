@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.management.Query;
+
 /**
  * @author : lihaoquan
  */
@@ -32,8 +34,12 @@ public class LoginController {
         model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
         Subject subject = SecurityUtils.getSubject();
 
-        if(QueryUtil.isNotEmpty(subject)
+        /*if(QueryUtil.isNotEmpty(subject)
                 && QueryUtil.isNotEmpty(subject.getPrincipals())) {
+            return "/views/calendar/index.jsp";
+        }*/
+
+        if(QueryUtil.isNotEmpty(subject) && subject.isAuthenticated()) {
             return "/views/calendar/index.jsp";
         }
         return "/views/system/login.jsp";
