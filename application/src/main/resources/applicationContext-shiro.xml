@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
        default-lazy-init="true">
 
     <description>Shiro安全配置</description>
@@ -69,12 +70,14 @@
     </bean>
 
 
-
-
     <bean id="credentialsMatcher" class="com.domac.app.system.credentials.RetryLimitHashedCredentialsMatcher">
         <constructor-arg value="SHA-1"/>
         <property name="hashIterations" value="1024"/>
         <property name="cacheManager" ref="shiroEhcacheManager" />
+    </bean>
+
+    <bean id="sslFilter" class="org.apache.shiro.web.filter.authz.SslFilter">
+        <property name="port" value="9001"/>
     </bean>
 
     <!-- Shiro Filter -->
@@ -82,9 +85,14 @@
         <property name="securityManager" ref="securityManager" />
         <property name="loginUrl" value="/login" />
         <property name="successUrl" value="/" />
+        <property name="filters">
+            <util:map>
+                <entry key="ssl" value-ref="sslFilter"/>
+            </util:map>
+        </property>
         <property name="filterChainDefinitions">
             <value>
-                /login = authc
+                /login = ssl,authc
                 /logout = logout
                 /static/** = anon
                 /** = user
