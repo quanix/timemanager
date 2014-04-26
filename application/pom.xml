@@ -10,7 +10,7 @@
     <name>timemanager :: application</name>
     <packaging>pom</packaging>
 
-    <description>时间管理工具POM</description>
+    <description>时间管理工具</description>
 
     <!--======================================= 版本属性 =================================================-->
     <properties>
