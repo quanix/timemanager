@@ -8,6 +8,7 @@
 
     <modules>
         <module>parent</module>
+        <module>chapter2</module>
     </modules>
 
     <dependencies>
