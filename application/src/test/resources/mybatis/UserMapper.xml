@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.domac.app.system.repository.UserMyBatisDao">
+
+    <resultMap id="usersMap" type="User">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+    </resultMap>
+
+
+
+    <!--
+        获取用户: 输出直接映射到对象, login_name列要"as loginName"以方便映射 ,team_id as "team.id"创建team对象并赋值
+    -->
+    <select id="getAllUsers" resultMap="usersMap">
+        select id, username
+        from s_user
+    </select>
+
+</mapper>

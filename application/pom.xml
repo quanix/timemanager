@@ -44,6 +44,8 @@
         <!-- Shiro 安全框架 -->
         <shiro.version>1.2.3</shiro.version>
 
+        <mybatis.version>3.2.7</mybatis.version>
+
     </properties>
 
     <!--======================================= 第三方依赖包 =============================================-->
@@ -167,6 +169,18 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.2</version>
         </dependency>
 
         <!-- JSON begin -->
