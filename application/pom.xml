@@ -26,6 +26,7 @@
         <commons-io.version>2.4</commons-io.version>
         <jetty.version>7.6.13.v20130916</jetty.version>
         <sitemesh.version>2.4.2</sitemesh.version>
+        <jolokia.version>1.2.0</jolokia.version>
 
         <!-- H2 -->
         <h2.version>1.3.173</h2.version>
@@ -326,6 +327,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- jolokia Restful JMX begin -->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+            <version>${jolokia.version}</version>
+        </dependency>
+        <!-- jolokia end -->
 
         <!-- *************单元测试************ -->
         <dependency>
