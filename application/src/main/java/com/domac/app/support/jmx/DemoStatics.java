@@ -13,7 +13,7 @@ public class DemoStatics {
     public static void main(String[] args) throws Exception {
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
 
-        ObjectName objectName = new ObjectName("com.domac.app.support.jmx:type=Demo");
+        ObjectName objectName = new ObjectName("Myapp:name=Demo");
         mBeanServer.registerMBean(new Demo(),objectName);
 
         // Wait forever

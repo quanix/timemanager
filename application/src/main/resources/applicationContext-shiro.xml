@@ -85,14 +85,15 @@
         <property name="securityManager" ref="securityManager" />
         <property name="loginUrl" value="/login" />
         <property name="successUrl" value="/" />
-        <property name="filters">
+        <!--<property name="filters">
             <util:map>
                 <entry key="ssl" value-ref="sslFilter"/>
             </util:map>
-        </property>
+        </property>-->
         <property name="filterChainDefinitions">
             <value>
-                /login = ssl,authc
+                <!--/login = ssl,authc  -->
+                /login = authc
                 /logout = logout
                 /static/** = anon
                 /** = user
