@@ -48,6 +48,9 @@
 
         <!--监控 -->
         <druid.version>1.0.5</druid.version>
+
+        <!-- 分布式缓存框架 -->
+        <spymemcached.version>2.11.1</spymemcached.version>
     </properties>
 
     <!--======================================= 第三方依赖包 =============================================-->
@@ -396,6 +399,22 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
+        </dependency>
+
+
+        <!-- Memcached Client -->
+        <dependency>
+            <groupId>net.spy</groupId>
+            <artifactId>spymemcached</artifactId>
+            <version>${spymemcached.version}</version>
+        </dependency>
+
+        <!-- memcached 服务模拟器 -->
+        <dependency>
+            <groupId>com.thimbleware.jmemcached</groupId>
+            <artifactId>jmemcached-core</artifactId>
+            <version>1.0.0</version>
+            <!--<scope>test</scope>-->
         </dependency>
 
     </dependencies>
