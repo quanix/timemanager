@@ -26,6 +26,7 @@
         <httpclient.version>4.3.2</httpclient.version>
         <commons-io.version>2.4</commons-io.version>
         <jetty.version>7.6.13.v20130916</jetty.version>
+        <tomcat.maven.version>2.1</tomcat.maven.version>
         <sitemesh.version>2.4.2</sitemesh.version>
         <jolokia.version>1.2.0</jolokia.version>
 
@@ -432,6 +433,16 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                     <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+            <!-- -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat.maven.version}</version>
+                <configuration>
+                    <port>9080</port>
                 </configuration>
             </plugin>
 
