@@ -22,8 +22,10 @@
     </bean>
 
 
-    <!-- Memcached 模拟器 -->
+    <!-- Memcached 模拟器 (如需测试,请开启)
     <bean id="memcachedSimulator" class="com.domac.app.support.cache.MemcachedSimulator" lazy-init="false">
         <property name="serverUrl" value="localhost:11211" />
     </bean>
+    -->
+
 </beans>
