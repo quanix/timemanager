@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * Author : lihaoquan
- * Description :
+ * Description : 抽象实体
  */
 // JPA 基类的标识
 @MappedSuperclass
