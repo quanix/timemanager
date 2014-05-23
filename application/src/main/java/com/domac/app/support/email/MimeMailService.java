@@ -2,10 +2,15 @@ package com.domac.app.support.email;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * created by quanix
@@ -38,6 +43,9 @@ public class MimeMailService {
             String content = "hello , this is ios";
             helper.setText(content);
 
+            File attachment = generateAttachment();
+            helper.addAttachment("附件信息.txt",attachment);
+
             mailSender.send(msg);
             logger.info("HTML版邮件已发送至quanix@163.com");
         }catch (Exception e) {
@@ -47,5 +55,15 @@ public class MimeMailService {
 
     public void setMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
+    }
+
+    private File generateAttachment() throws MessagingException {
+        Resource resource = new FileSystemResource("E:\\maven-3.2.1\\README.txt");
+        try {
+            return resource.getFile();
+        } catch (IOException e) {
+            logger.error("构造邮件失败,附件文件不存在", e);
+            throw new MessagingException("附件文件不存在", e);
+        }
     }
 }
