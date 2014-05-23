@@ -21,9 +21,18 @@ public class MailServiceTest extends TransactionalTestCase {
     @Autowired
     private SimpleMailService simpleMailService;
 
+    @Autowired
+    private MimeMailService mimeMailService;
+
     @Test
     public void sendSimpleMail() throws MessagingException, InterruptedException, IOException {
         simpleMailService.sendNotificationMail("domac");
     }
 
+
+    @Test
+    public void sendMimeMail() throws InterruptedException, MessagingException, IOException {
+
+        mimeMailService.sendNotificationMail("idomac");
+    }
 }

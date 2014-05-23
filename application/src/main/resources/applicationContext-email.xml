@@ -15,6 +15,11 @@
         </property>
     </bean>
 
+    <!-- MIME邮件服务类 -->
+    <bean id="mimeMailService" class="com.domac.app.support.email.MimeMailService">
+        <property name="mailSender" ref="mailSender" />
+    </bean>
+
     <!-- 邮件发送器 -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
