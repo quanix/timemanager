@@ -13,4 +13,7 @@ public class MimeMailService {
     private static final String DEFAULT_ENCODING = "utf-8";
 
     private static Logger logger = LoggerFactory.getLogger(MimeMailService.class);
+
+
+
 }
